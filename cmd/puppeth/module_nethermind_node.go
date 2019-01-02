@@ -27,7 +27,7 @@ import (
 
 // nodeDockerfile is the Dockerfile required to run an Ethereum node.
 var nethermindNodeDockerfile = `
-FROM nethermind/nethermind-runner:latest
+FROM nethermind/nethermind.runner:latest
 
 ADD genesis.json /genesis.json
 {{if .Unlock}}
