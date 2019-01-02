@@ -29,9 +29,8 @@ import (
 var nethermindNodeDockerfile = `
 FROM nethermind/nethermind.runner:latest
 
-ENV NETHERMIND_CONFIG mainnet
-
 EXPOSE 8545 {{.Port}}
+ENV NETHERMIND_CONFIG spaceneth
 ENV NETHERMIND_INITCONFIG_JSONRPCENABLED true
 ENV NETHERMIND_URL http://*:8545
 
