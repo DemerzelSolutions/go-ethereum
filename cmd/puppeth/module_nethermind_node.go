@@ -40,7 +40,7 @@ ADD genesis.json /genesis.json
 RUN \
 	\{{if .Unlock}}
 	echo 'mkdir -p /root/.ethereum/keystore/ && cp /signer.json /root/.ethereum/keystore/' >> geth.sh && \{{end}}
-	echo $'exec dotnet Nethermind.Runner.dll --InitConfig.P2PPort {{.Port}} --InitConfig.ChainSpecFormat genesis --InitConfig.ChainSpecPath "/genesis.json" --InitConfig.JsonRpcEnabled true --InitConfig.HttpPort 8545 --InitConfig.HttpHost extip:{{.IP}} --NetworkConfig.ActivePeersMaxCount {{.Peers}} {{if .Bootnodes}}--NetworkConfig.Bootnodes {{.Bootnodes}}{{end}} {{if .Unlock}} --InitConfig.IsMining true{{end}}' >> nethermind.sh
+	echo $'exec dotnet Nethermind.Runner.dll --InitConfig.P2PPort {{.Port}} --InitConfig.ChainSpecFormat genesis --InitConfig.ChainSpecPath "/genesis.json" --InitConfig.GenesisHash "" --InitConfig.JsonRpcEnabled false --InitConfig.HttpPort 8545 --InitConfig.HttpHost extip:{{.IP}} --NetworkConfig.ActivePeersMaxCount {{.Peers}} {{if .Bootnodes}}--NetworkConfig.Bootnodes {{.Bootnodes}}{{end}} {{if .Unlock}} --InitConfig.IsMining true{{end}}' >> nethermind.sh
 
 ENTRYPOINT ["/bin/sh", "nethermind.sh"]
 `
