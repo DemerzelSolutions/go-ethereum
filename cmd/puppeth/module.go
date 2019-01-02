@@ -40,6 +40,10 @@ var (
 	// seems to not respond to communication attempts.
 	ErrServiceUnreachable = errors.New("service unreachable")
 
+	// ErrServiceUnreachable is returned when a service container is running, but
+	// seems to not respond to communication attempts.
+	ErrCliFailure = errors.New("cli failure")
+
 	// ErrNotExposed is returned if a web-service doesn't have an exposed port, nor
 	// a reverse-proxy in front of it to forward requests.
 	ErrNotExposed = errors.New("service not exposed, nor proxied")
