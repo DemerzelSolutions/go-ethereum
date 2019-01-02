@@ -172,7 +172,7 @@ func (w *wizard) deployComponent() {
 	fmt.Println()
 	fmt.Println("What would you like to deploy? (recommended order)")
 	fmt.Println(" 1. Ethstats    - Network monitoring tool")
-	fmt.Println(" 2. Bootnode	  - Entry point of the network")
+	fmt.Println(" 2. Bootnode    - Entry point of the network")
 	fmt.Println(" 3. Sealer	      - Full node minting new blocks")
 	fmt.Println(" 4. Explorer    - Chain analysis webservice (ethash only)")
 	fmt.Println(" 5. Wallet      - Browser wallet for quick sends")

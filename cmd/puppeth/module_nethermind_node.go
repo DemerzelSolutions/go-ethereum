@@ -92,7 +92,7 @@ func deployNethermindNode(client *sshClient, network string, bootnodes []string,
 		lightFlag = fmt.Sprintf("--lightpeers=%d --lightserv=50", config.peersLight)
 	}
 	dockerfile := new(bytes.Buffer)
-	template.Must(template.New("").Parse(nodeDockerfile)).Execute(dockerfile, map[string]interface{}{
+	template.Must(template.New("").Parse(nethermindNodeDockerfile)).Execute(dockerfile, map[string]interface{}{
 		"NetworkID": config.network,
 		"Port":      config.port,
 		"IP":        client.address,
@@ -109,7 +109,7 @@ func deployNethermindNode(client *sshClient, network string, bootnodes []string,
 	files[filepath.Join(workdir, "Dockerfile")] = dockerfile.Bytes()
 
 	composefile := new(bytes.Buffer)
-	template.Must(template.New("").Parse(nodeComposefile)).Execute(composefile, map[string]interface{}{
+	template.Must(template.New("").Parse(nethermindNodeComposefile)).Execute(composefile, map[string]interface{}{
 		"Type":       kind,
 		"Datadir":    config.datadir,
 		"Ethashdir":  config.ethashdir,
