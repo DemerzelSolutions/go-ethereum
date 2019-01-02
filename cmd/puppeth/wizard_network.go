@@ -171,15 +171,15 @@ func (w *wizard) deployComponent() {
 	// Print all the things we can deploy and wait or user choice
 	fmt.Println()
 	fmt.Println("What would you like to deploy? (recommended order)")
-	fmt.Println(" 1. Ethstats  - Network monitoring tool")
-	fmt.Println(" 2. Bootnode  - Entry point of the network")
-	fmt.Println(" 3. Sealer    - Full node minting new blocks")
-	fmt.Println(" 4. Explorer  - Chain analysis webservice (ethash only)")
-	fmt.Println(" 5. Wallet    - Browser wallet for quick sends")
-	fmt.Println(" 6. Faucet    - Crypto faucet to give away funds")
-	fmt.Println(" 7. Dashboard - Website listing above web-services")
-	fmt.Println(" 8. Nethermind Node - Nethermind node connected to the network")
-	fmt.Println(" 9. Nethermind Sealer - Nethermind node minting new blocks")
+	fmt.Println(" 1. Ethstats    - Network monitoring tool")
+	fmt.Println(" 2. Bootnode	  - Entry point of the network")
+	fmt.Println(" 3. Sealer	      - Full node minting new blocks")
+	fmt.Println(" 4. Explorer    - Chain analysis webservice (ethash only)")
+	fmt.Println(" 5. Wallet      - Browser wallet for quick sends")
+	fmt.Println(" 6. Faucet      - Crypto faucet to give away funds")
+	fmt.Println(" 7. Dashboard   - Website listing above web-services")
+	fmt.Println(" 8. Neth Node   - Nethermind node connected to the network")
+	fmt.Println(" 9. Neth Sealer - Nethermind node minting new blocks")
 
 	switch w.read() {
 	case "1":

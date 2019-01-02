@@ -27,7 +27,7 @@ import (
 
 // nodeDockerfile is the Dockerfile required to run an Ethereum node.
 var nethermindNodeDockerfile = `
-FROM ethereum/client-go:latest
+FROM nethermind/nethermind-runner:latest
 
 ADD genesis.json /genesis.json
 {{if .Unlock}}
@@ -35,11 +35,11 @@ ADD genesis.json /genesis.json
 	ADD signer.pass /signer.pass
 {{end}}
 RUN \
-  echo 'geth --cache 512 init /genesis.json' > geth.sh && \{{if .Unlock}}
+	\{{if .Unlock}}
 	echo 'mkdir -p /root/.ethereum/keystore/ && cp /signer.json /root/.ethereum/keystore/' >> geth.sh && \{{end}}
-	echo $'exec geth --networkid {{.NetworkID}} --cache 512 --port {{.Port}} --nat extip:{{.IP}} --maxpeers {{.Peers}} {{.LightFlag}} --ethstats \'{{.Ethstats}}\' {{if .Bootnodes}}--bootnodes {{.Bootnodes}}{{end}} {{if .Etherbase}}--miner.etherbase {{.Etherbase}} --mine --miner.threads 1{{end}} {{if .Unlock}}--unlock 0 --password /signer.pass --mine{{end}} --miner.gastarget {{.GasTarget}} --miner.gaslimit {{.GasLimit}} --miner.gasprice {{.GasPrice}}' >> geth.sh
+	echo $'dotnet Nethermind.Runner.dll --InitConfig.P2PPort {{.Port}} --InitConfig.HttpHost extip:{{.IP}} --NetworkConfig.ActivePeersMaxCount {{.Peers}} {{if .Bootnodes}}--NetworkConfig.Bootnodes {{.Bootnodes}}{{end}} {{if .Unlock}} --InitConfig.IsMining{{end}}' >> nethermind.sh
 
-ENTRYPOINT ["/bin/sh", "geth.sh"]
+ENTRYPOINT ["/bin/sh", "nethermind.sh"]
 `
 
 // nodeComposefile is the docker-compose.yml file required to deploy and maintain
