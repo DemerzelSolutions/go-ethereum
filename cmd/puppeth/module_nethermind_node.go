@@ -29,6 +29,8 @@ import (
 var nethermindNodeDockerfile = `
 FROM nethermind/nethermind.runner:latest
 
+ENV NETHERMIND_CONFIG mainnet
+
 ADD genesis.json /genesis.json
 {{if .Unlock}}
 	ADD signer.json /signer.json
@@ -37,7 +39,7 @@ ADD genesis.json /genesis.json
 RUN \
 	\{{if .Unlock}}
 	echo 'mkdir -p /root/.ethereum/keystore/ && cp /signer.json /root/.ethereum/keystore/' >> geth.sh && \{{end}}
-	echo $'dotnet Nethermind.Runner.dll --InitConfig.P2PPort {{.Port}} --InitConfig.HttpHost extip:{{.IP}} --NetworkConfig.ActivePeersMaxCount {{.Peers}} {{if .Bootnodes}}--NetworkConfig.Bootnodes {{.Bootnodes}}{{end}} {{if .Unlock}} --InitConfig.IsMining{{end}}' >> nethermind.sh
+	echo 'dotnet Nethermind.Runner.dll --InitConfig.P2PPort {{.Port}} --InitConfig.HttpHost extip:{{.IP}} --NetworkConfig.ActivePeersMaxCount {{.Peers}} {{if .Bootnodes}}--NetworkConfig.Bootnodes {{.Bootnodes}}{{end}} {{if .Unlock}} --InitConfig.IsMining true{{end}}' >> nethermind.sh
 
 ENTRYPOINT ["/bin/sh", "nethermind.sh"]
 `
